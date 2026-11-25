@@ -2,24 +2,29 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.12.5/brython.min.js"></script>
+    <script src="https://cloudflare.com"></script>
 </head>
 <body onload="brython()">
 
-    <h1 id="message">Click the button below!</h1>
-    <button id="my-btn">Click Me</button>
+    <h1>Python Text Analyzer</h1>
+    <input id="user-text" placeholder="Type a sentence here..." size="35">
+    <button id="check-btn">Analyze Text</button>
+    <p id="result"></p>
 
     <script type="text/python">
         from browser import document
 
-        count = 0
+        def analyze(event):
+            text = document["user-text"].value.strip()
+            if not text:
+                document["result"].text = "Please type something first!"
+                return
+            
+            word_count = len(text.split())
+            char_count = len(text)
+            document["result"].text = f"Words: {word_count} | Characters: {char_count}"
 
-        def button_clicked(event):
-            global count
-            count += 1
-            document["message"].text = f"You clicked the Python button {count} times!"
-
-        document["my-btn"].bind("click", button_clicked)
+        document["check-btn"].bind("click", analyze)
     </script>
 
 </body>
