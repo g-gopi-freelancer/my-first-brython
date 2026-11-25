@@ -69,6 +69,9 @@
     <script type="text/python">
         from browser import document
 
+            <script type="text/python">
+        from browser import document
+
         def analyze(event):
             text = document["user-text"].value.strip()
             if not text:
@@ -76,10 +79,17 @@
                 return
             
             word_count = len(text.split())
-            char_count = len(text)
-            document["result"].text = f"Words: {word_count} | Characters: {char_count}"
+            chars_with_spaces = len(text)
+            chars_no_spaces = len(text.replace(" ", ""))
+            
+            document["result"].text = (
+                f"Words: {word_count} | "
+                f"Characters: {chars_no_spaces} (with spaces: {chars_with_spaces})"
+            )
 
         document["check-btn"].bind("click", analyze)
+    </script>
+
     </script>
 
 </body>
