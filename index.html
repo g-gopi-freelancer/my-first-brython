@@ -66,23 +66,21 @@
         <p id="result"></p>
     </div>
 
-    <script type="text/python">
-        from browser import document
+<script type="text/python">
+from browser import document
 
-        def analyze(event):
-            text = document["user-text"].value.strip()
-            if not text:
-                document["result"].text = "Please type something first!"
-                return
-            
-            word_count = len(text.split())
-            chars_with_spaces = len(text)
-            chars_no_spaces = len(text.replace(" ", ""))
-            
-            document["result"].text = f"Words: {word_count} | Characters: {chars_no_spaces} (with spaces: {chars_with_spaces})"
+def analyze(event):
+    text = document["user-text"].value.strip()
+    if not text:
+        document["result"].text = "Please type something first!"
+        return
+    word_count = len(text.split())
+    chars_with_spaces = len(text)
+    chars_no_spaces = len(text.replace(" ", ""))
+    document["result"].text = f"Words: {word_count} | Characters: {chars_no_spaces} (with spaces: {chars_with_spaces})"
 
-        document["check-btn"].bind("click", analyze)
-    </script>
+document["check-btn"].bind("click", analyze)
+</script>
 
 </body>
 </html>
